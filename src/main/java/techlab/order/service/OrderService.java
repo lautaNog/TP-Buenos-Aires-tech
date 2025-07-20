@@ -1,5 +1,6 @@
 package techlab.order.service;
 
+import lombok.NonNull;
 import org.hibernate.query.Order;
 import org.springframework.stereotype.Service;
 import techlab.exceptions.OrderException;
@@ -11,8 +12,10 @@ import techlab.exceptions.product.ProductNotFoundException;
 import techlab.exceptions.user.UserNotFoundException;
 import techlab.order.dto.CartDTO;
 import techlab.order.dto.OrderDTO;
+import techlab.order.dto.SimplifiedOrder;
 import techlab.order.entity.OrderEntity;
 import techlab.order.repository.OrderRepository;
+import techlab.product.dto.ProductDTO;
 import techlab.product.entity.ProductEntity;
 import techlab.product.respository.ProductRepository;
 import techlab.user.dto.UserResponseDTO;
@@ -21,6 +24,7 @@ import techlab.user.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -125,4 +129,32 @@ public class OrderService {
                 order.getCostoTotal()
         );
     }
-}
+
+    public CartDTO addCart(CartDTO cart) {
+        try {
+            validCart(cart.getCart());
+            UserEntity user = this.userRepository.findById(String.valueOf(cart.getUserId())).orElseThrow(() -> new UserNotFoundException(""));
+
+            for (SimplifiedOrder order: cart.getCart()) {
+                ProductEntity product = this.productRepository.findById(order.getProductId()).orElseThrow(() -> new ProductNotFoundException(""));
+                float costoTotal = order.getQuantity() * product.getPrecio();
+                OrderDTO newOrder = new OrderDTO(user.getUserName(), product.getId(), product.getNombre(), order.getQuantity(), costoTotal);
+                addOrder(newOrder);
+            }
+            return cart;
+        }catch (Exception e) {
+            throw new InvalidCartException("");
+        }
+    }
+
+    private void validCart(@NonNull List<SimplifiedOrder> cart) {
+
+        for (SimplifiedOrder order: cart) {
+            ProductEntity product = this.productRepository.findById(order.getProductId()).orElseThrow(() -> new ProductNotFoundException(""));
+            if (order.getQuantity() > product.getStock() || order.getQuantity()<0) {
+                throw new NotValidQuantityException("");
+            }
+        }
+    }
+    }
+

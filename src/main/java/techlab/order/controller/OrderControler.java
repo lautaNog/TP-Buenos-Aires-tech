@@ -6,6 +6,7 @@ import org.hibernate.query.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import techlab.exceptions.order.InvalidCartException;
 import techlab.exceptions.order.NotValidQuantityException;
 import techlab.exceptions.order.OrderNotFoundException;
 import techlab.exceptions.product.ProductNotFoundException;
@@ -36,6 +37,15 @@ public class OrderControler {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @PostMapping("/add/cart")
+    private ResponseEntity<CartDTO> addCart (@RequestBody(required = true) CartDTO cart) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.service.addCart(cart));
+        }catch (InvalidCartException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
     }
 
