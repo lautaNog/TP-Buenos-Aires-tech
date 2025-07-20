@@ -1,0 +1,182 @@
+[
+  {
+    "id": null,
+    "nombre": "Mouse Gamer RGB",
+    "descripcion": "Mouse óptico con 6 botones y luces LED RGB",
+    "urlImagen": "https://example.com/img/mouse1.jpg",
+    "categoria": "Periféricos",
+    "precio": 3499.99,
+    "stock": 150
+  },
+  {
+    "id": null,
+    "nombre": "Teclado Mecánico",
+    "descripcion": "Teclado con switches red y retroiluminación",
+    "urlImagen": "https://example.com/img/teclado1.jpg",
+    "categoria": "Periféricos",
+    "precio": 8999.50,
+    "stock": 85
+  },
+  {
+    "id": null,
+    "nombre": "Monitor 24'' LED",
+    "descripcion": "Monitor Full HD con tecnología IPS",
+    "urlImagen": "https://example.com/img/monitor1.jpg",
+    "categoria": "Monitores",
+    "precio": 45999.00,
+    "stock": 35
+  },
+  {
+    "id": null,
+    "nombre": "Disco SSD 1TB",
+    "descripcion": "Disco sólido SATA3 1TB para almacenamiento rápido",
+    "urlImagen": "https://example.com/img/ssd1.jpg",
+    "categoria": "Almacenamiento",
+    "precio": 23999.99,
+    "stock": 60
+  },
+  {
+    "id": null,
+    "nombre": "Gabinete ATX con Vidrio Templado",
+    "descripcion": "Gabinete con diseño gamer y excelente ventilación",
+    "urlImagen": "https://example.com/img/gabinete1.jpg",
+    "categoria": "Gabinetes",
+    "precio": 18999.00,
+    "stock": 40
+  },
+  {
+    "id": null,
+    "nombre": "Auriculares Inalámbricos",
+    "descripcion": "Auriculares con bluetooth y micrófono integrado",
+    "urlImagen": "https://example.com/img/auriculares1.jpg",
+    "categoria": "Audio",
+    "precio": 12999.90,
+    "stock": 200
+  },
+  {
+    "id": null,
+    "nombre": "Webcam HD 1080p",
+    "descripcion": "Cámara para videollamadas con micrófono",
+    "urlImagen": "https://example.com/img/webcam1.jpg",
+    "categoria": "Accesorios",
+    "precio": 7499.00,
+    "stock": 70
+  },
+  {
+    "id": null,
+    "nombre": "Silla Ergonómica Gamer",
+    "descripcion": "Silla con soporte lumbar y reclinación",
+    "urlImagen": "https://example.com/img/silla1.jpg",
+    "categoria": "Muebles",
+    "precio": 59999.00,
+    "stock": 20
+  },
+  {
+    "id": null,
+    "nombre": "Notebook 15.6'' Ryzen 7",
+    "descripcion": "Laptop con 16GB RAM y 512GB SSD",
+    "urlImagen": "https://example.com/img/notebook1.jpg",
+    "categoria": "Notebooks",
+    "precio": 329999.99,
+    "stock": 12
+  },
+  {
+    "id": null,
+    "nombre": "Router Wi-Fi 6 AX1800",
+    "descripcion": "Router de última generación con alta velocidad",
+    "urlImagen": "https://example.com/img/router1.jpg",
+    "categoria": "Redes",
+    "precio": 17999.00,
+    "stock": 55
+  },
+  {
+    "id": null,
+    "nombre": "Memoria RAM DDR4 16GB",
+    "descripcion": "Memoria de alto rendimiento para PC",
+    "urlImagen": "https://example.com/img/ram1.jpg",
+    "categoria": "Memoria",
+    "precio": 15999.50,
+    "stock": 100
+  },
+  {
+    "id": null,
+    "nombre": "Tablet 10'' Android",
+    "descripcion": "Tablet con pantalla HD y 64GB de almacenamiento",
+    "urlImagen": "https://example.com/img/tablet1.jpg",
+    "categoria": "Tablets",
+    "precio": 79999.00,
+    "stock": 25
+  },
+  {
+    "id": null,
+    "nombre": "Impresora Multifunción Wi-Fi",
+    "descripcion": "Impresora, escáner y copiadora en un solo equipo",
+    "urlImagen": "https://example.com/img/impresora1.jpg",
+    "categoria": "Impresoras",
+    "precio": 25999.00,
+    "stock": 30
+  },
+  {
+    "id": null,
+    "nombre": "Disco Externo 2TB",
+    "descripcion": "Almacenamiento portátil USB 3.0",
+    "urlImagen": "https://example.com/img/discoext1.jpg",
+    "categoria": "Almacenamiento",
+    "precio": 29999.00,
+    "stock": 48
+  },
+  {
+    "id": null,
+    "nombre": "Cooler para CPU RGB",
+    "descripcion": "Enfriador con iluminación y ventilador silencioso",
+    "urlImagen": "https://example.com/img/cooler1.jpg",
+    "categoria": "Refrigeración",
+    "precio": 9999.00,
+    "stock": 75
+  },
+  {
+    "id": null,
+    "nombre": "Cámara IP de Seguridad",
+    "descripcion": "Vigilancia inteligente con app móvil",
+    "urlImagen": "https://example.com/img/camara1.jpg",
+    "categoria": "Seguridad",
+    "precio": 11499.90,
+    "stock": 90
+  },
+  {
+    "id": null,
+    "nombre": "Fuente 650W 80 Plus Bronze",
+    "descripcion": "Fuente de alimentación confiable para PC",
+    "urlImagen": "https://example.com/img/fuente1.jpg",
+    "categoria": "Fuentes",
+    "precio": 18499.00,
+    "stock": 32
+  },
+  {
+    "id": null,
+    "nombre": "Joystick Inalámbrico",
+    "descripcion": "Control para PC y consolas con vibración",
+    "urlImagen": "https://example.com/img/joystick1.jpg",
+    "categoria": "Gaming",
+    "precio": 10999.00,
+    "stock": 66
+  },
+  {
+    "id": null,
+    "nombre": "Soporte Dual Monitor",
+    "descripcion": "Soporte articulado para 2 monitores",
+    "urlImagen": "https://example.com/img/soporte1.jpg",
+    "categoria": "Accesorios",
+    "precio": 13499.00,
+    "stock": 22
+  },
+  {
+    "id": null,
+    "nombre": "Lector de Tarjetas USB",
+    "descripcion": "Lector de tarjetas SD, microSD, MS y más",
+    "urlImagen": "https://example.com/img/lector1.jpg",
+    "categoria": "Accesorios",
+    "precio": 3499.00,
+    "stock": 110
+  }
+]
