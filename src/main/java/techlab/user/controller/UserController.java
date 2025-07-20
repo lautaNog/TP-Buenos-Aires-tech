@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import techlab.exceptions.user.UserNotFoundException;
+import techlab.order.dto.OrderDTO;
 import techlab.user.dto.UserRegisterDTO;
 import techlab.user.dto.UserResponseDTO;
 import techlab.user.service.UserService;
@@ -78,6 +79,15 @@ public class UserController {
         }
         catch (UserNotFoundException e) {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @GetMapping("/{id}/orders")
+    public ResponseEntity<List<OrderDTO>> listOrders (@PathVariable long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.service.listOrders(id));
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 }

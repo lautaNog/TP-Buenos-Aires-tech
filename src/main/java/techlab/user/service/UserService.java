@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 import techlab.exceptions.user.ExisitingUserException;
 import techlab.exceptions.user.UserNotFoundException;
 import techlab.exceptions.user.UsernameTakenException;
+import techlab.order.dto.OrderDTO;
+import techlab.order.entity.OrderEntity;
+import techlab.order.repository.OrderRepository;
 import techlab.user.dto.UserRegisterDTO;
 import techlab.user.dto.UserResponseDTO;
 import techlab.user.entity.UserEntity;
@@ -16,15 +19,18 @@ import java.util.Objects;
 @Service
 public class UserService {
 
-    private final UserRepository repository;
+    private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
 
-    public UserService(UserRepository repository) {
-        this.repository = repository;
+    public UserService(UserRepository userRepository, OrderRepository orderRepository) {
+        this.userRepository = userRepository;
+        this.orderRepository = orderRepository;
     }
+
 
     //POST
     public String addUser(UserRegisterDTO userForm) {
-        List<UserEntity> users = this.repository.findByUserNameOrPhone(userForm.getUserName(), userForm.getPhone());
+        List<UserEntity> users = this.userRepository.findByUserNameOrPhone(userForm.getUserName(), userForm.getPhone());
 
         //Si hay alguno en la lista, entoces no se va a poder registrar
         if (!(users.isEmpty())) {
@@ -32,14 +38,14 @@ public class UserService {
         }
         else {
             UserEntity newUser = new UserEntity(userForm.getUserName(), userForm.getName(), userForm.getLastname(), userForm.getEmail(), userForm.getPassword(), userForm.getPhone());
-            this.repository.save(newUser);
+            this.userRepository.save(newUser);
             return "Registration succesful.";
         }
     }
 
     //GET
     public List<UserResponseDTO> searchUsers(Long id, String username, String name) {
-        List<UserEntity> users = this.repository.findByIdOrUserNameOrName(id, username, name);
+        List<UserEntity> users = this.userRepository.findByIdOrUserNameOrName(id, username, name);
 
         if (users.isEmpty()) {
             throw new UserNotFoundException("");
@@ -57,7 +63,7 @@ public class UserService {
     }
 
     public List<UserResponseDTO> listUsers() {
-        List<UserEntity> users = this.repository.findAll();
+        List<UserEntity> users = this.userRepository.findAll();
         List<UserResponseDTO> usersDTOs = new ArrayList<>();
 
         try{
@@ -72,9 +78,9 @@ public class UserService {
 
     //PUT
     public UserResponseDTO updateUser(Long id, UserRegisterDTO userForm) {
-        UserEntity foundUser = this.repository.findById(String.valueOf(id)).orElseThrow(() -> new UserNotFoundException(""));
+        UserEntity foundUser = this.userRepository.findById(String.valueOf(id)).orElseThrow(() -> new UserNotFoundException(""));
 
-        if (this.repository.existsByUserName(userForm.getUserName()) &&
+        if (this.userRepository.existsByUserName(userForm.getUserName()) &&
                 !(Objects.equals(foundUser.getUserName(), userForm.getUserName()))) {
             throw new UsernameTakenException("");
         }
@@ -86,7 +92,7 @@ public class UserService {
             foundUser.setPassword(userForm.getPassword());
             foundUser.setPhone(userForm.getPhone());
 
-            this.repository.save(foundUser);
+            this.userRepository.save(foundUser);
 
             return new UserResponseDTO(
                     foundUser.getUserName(),
@@ -99,14 +105,14 @@ public class UserService {
 
     //DELETE
     public UserResponseDTO deleteUser(Long id) {
-        UserEntity user = this.repository.findById(String.valueOf(id)).orElseThrow(()-> new UserNotFoundException(""));
+        UserEntity user = this.userRepository.findById(String.valueOf(id)).orElseThrow(()-> new UserNotFoundException(""));
         UserResponseDTO userDTO = new UserResponseDTO(
                 user.getUserName(),
                 user.getName(),
                 user.getLastname(),
                 user.getEmail()
         );
-        this.repository.deleteById(String.valueOf(id));
+        this.userRepository.deleteById(String.valueOf(id));
 
         return userDTO;
 
@@ -118,5 +124,26 @@ public class UserService {
                 user.getName(),
                 user.getLastname(),
                 user.getEmail());
+    }
+
+    public List<OrderDTO> listOrders(long id) {
+        UserEntity user = this.userRepository.findById(String.valueOf(id)).orElseThrow(() -> new UserNotFoundException(""));
+        List<OrderEntity> orderEntities = this.orderRepository.findByUser(user);
+
+        if (orderEntities.isEmpty()) {
+            throw new RuntimeException("");
+        }
+        else{
+            List<OrderDTO> orderDTOS = new ArrayList<>();
+            for (OrderEntity orderEntity: orderEntities) {
+                orderDTOS.add(new OrderDTO(
+                        user.getUserName(),
+                        orderEntity.getProduct().getId(),
+                        orderEntity.getProduct().getNombre(),
+                        orderEntity.getQuantity(),
+                        orderEntity.getCostoTotal()));
+            }
+            return orderDTOS;
+        }
     }
 }
